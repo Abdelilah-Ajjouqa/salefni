@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  # React + Vite frontend application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: salefni-app
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm run dev -- --host
+    networks:
+      - salefni-network
+
+  # JSON Server for mock API
+  json-server:
+    image: node:18-alpine
+    container_name: salefni-json-server
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./db.json:/app/db.json
+      - ./package.json:/app/package.json
+    command: sh -c "npm install -g json-server && json-server --watch db.json --host 0.0.0.0 --port 3000"
+    networks:
+      - salefni-network
+
+  # SonarQube for code quality analysis
+  sonarqube:
+    image: sonarqube:latest
+    container_name: salefni-sonarqube
+    ports:
+      - "9000:9000"
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+    networks:
+      - salefni-network
+
+networks:
+  salefni-network:
+    driver: bridge
+
+volumes:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
