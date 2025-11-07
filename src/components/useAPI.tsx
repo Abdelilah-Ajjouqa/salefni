@@ -1,13 +1,15 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const useAPI = (url: string) => {
-    const [data, setData] = useState();
+const useAPI = <T,>(url: string) => {
+    const [data, setData] = useState<T | null>(null);
     const [error, setError] = useState(null)
 
-    axios.get(url)
-        .then((res)=>{setData(res.data)})
-        .catch((err)=>{setError(err)})
+    useEffect(() => {
+        axios.get(url)
+            .then((res) => { setData(res.data) })
+            .catch((err) => { setError(err) })
+    }, [url])
 
     return [data, error];
 }
