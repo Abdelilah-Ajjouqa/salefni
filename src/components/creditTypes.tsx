@@ -1,10 +1,8 @@
 import useAPI from "./useAPI";
-import type { CreditTypes } from "../types/types";
+import type { CreditTypesInterface } from "../types/types";
 
-
-
-const creditTypes = () => {
-    const [data, error] = useAPI<CreditTypes[]>("http://localhost:3000/creditTypes")
+const CreditTypes = () => {
+    const [data, error] = useAPI<CreditTypesInterface[]>("http://localhost:3000/creditTypes")
     if (error) {
         throw new Error(`cannot fetching api, ${error}`);
     }
@@ -27,4 +25,4 @@ const creditTypes = () => {
     )
 }
 
-export default creditTypes;
+export default CreditTypes;

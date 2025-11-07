@@ -1,4 +1,4 @@
-export interface CreditTypes {
+export interface CreditTypesInterface {
     id: string,
     label: string,
     defaultAnnualRate: number,
@@ -9,17 +9,17 @@ export interface CreditTypes {
     maxAmount: number
 }
 
-export interface EmploymentTypes {
+export interface EmploymentTypesInterface {
     id: string,
     label: string
 }
 
-export interface Jobs {
+export interface JobsInterface {
     id: string,
     label: string
 }
 
-export interface Application {
+export interface ApplicationInterface {
     id: number,
     simulationId: number,
     fullName: string,
@@ -37,16 +37,16 @@ export interface Application {
     updatedAt: string
 }
 
-interface Amortization {
+interface AmortizationInterface {
     month: number,
     interest: number,
     principal: number,
     remaining: number
 }
 
-export interface Simulations {
+export interface SimulationsInterface {
     id: number,
-    creditTypeId: CreditTypes['id'],
+    creditTypeId: CreditTypesInterface['id'],
     amount: number,
     months: number,
     annualRate: number,
@@ -55,11 +55,11 @@ export interface Simulations {
     monthlyPayment: number,
     totalCost: number,
     apr: number,
-    amortization: Amortization[],
+    amortization: AmortizationInterface[],
     createdAt: string
 }
 
-export interface Notifications {
+export interface NotificationsInterface {
     id: number,
     type: string,
     applicationId: number,
@@ -68,13 +68,13 @@ export interface Notifications {
     createdAt: string
 }
 
-export interface Admins {
+export interface AdminsInterface {
     id: number,
     email: string,
     password: string
 }
 
-export interface Settings {
+export interface SettingsInterface {
     currency: string,
     maxSimRowsPreview: number,
     allowGuestApplications: boolean
