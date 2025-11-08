@@ -1,10 +1,10 @@
-import Layout from "./components/layouts/Layout"
+// import { Outlet } from "react-router-dom"
+// import Layout from "./components/layouts/Layout"
+
 function App() {
   return (
     <>
-    <Layout>
       <h1>Hola</h1>
-    </Layout>
     </>
   )
 }
