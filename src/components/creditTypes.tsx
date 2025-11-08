@@ -1,14 +1,19 @@
 import useAPI from "./useAPI";
 import type { CreditTypesInterface } from "../types/types";
 
-const CreditTypes = () => {
-    const [data, error] = useAPI<CreditTypesInterface[]>("http://localhost:3000/creditTypes")
+const CreditTypes: React.FC = () => {
+    const {data, loading, error }= useAPI<CreditTypesInterface[]>("http://localhost:3000/creditTypes")
+
+    if (loading){
+        return <p>Loading data from credit types</p>
+    }
+
     if (error) {
-        throw new Error(`cannot fetching api, ${error}`);
+        return <p className="text-red-500">Error fetching credit types: {error}</p>
     }
 
     if (!data) {
-        throw new Error(`no data found, ${data}`);
+        return <p>No credit types found</p>
     }
 
     return (
