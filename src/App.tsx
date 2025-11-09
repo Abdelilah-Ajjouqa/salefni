@@ -1,10 +1,9 @@
-// import { Outlet } from "react-router-dom"
-// import Layout from "./components/layouts/Layout"
+import Home from "./components/Home"
 
 function App() {
   return (
     <>
-      <h1>Hola</h1>
+      <Home/>
     </>
   )
 }
